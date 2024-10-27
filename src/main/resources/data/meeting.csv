@@ -1,0 +1,5 @@
+id,type,title,participants,meetingRoom,agenda,startAt,endAt
+1,"MEETING","Meeting 1","Seol, Yun","Room 1","Discussing the project1","2024-01-01 09:00:00","2024-01-01 10:00:00"
+2,"MEETING","Meeting 2","Seol, Yun","Room 2","Discussing the project2","2024-02-01 10:00:00","2024-02-01 11:00:00"
+3,"MEETING","Meeting 3","Seol, Yun","Room 3","Discussing the project3","2024-03-01 11:00:00","2024-03-01 12:00:00"
+4,"MEETING","Meeting 4","Seol, Yun","Room 4","Discussing the project4","2024-04-01 12:00:00","2024-04-01 13:00:00"
