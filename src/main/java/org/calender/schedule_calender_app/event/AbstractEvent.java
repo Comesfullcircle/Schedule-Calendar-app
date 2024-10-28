@@ -47,7 +47,7 @@ public abstract class AbstractEvent implements Event {
         update(update);
     }
 
-    public void defaultUpdate(AbstractAuditableEvent update) {
+    private void defaultUpdate(AbstractAuditableEvent update) {
         this.title = update.getTitle();
         this.startAt = update.getStartAt();
         this.endAt = update.getEndAt();

@@ -19,34 +19,24 @@ public class CalenderAppApplication {
         List<Meeting> meetings = csvReader.readMeetings(meetingCsvPath);
         meetings.forEach(schedule::add);
 
-        schedule.printAll();
+        Meeting meeting = meetings.get(0);
+        meeting.print();
 
-       /*try {
-            List<Meeting> meetings = csvReader.readMeetings(meetingCsvPath);
-            meetings.forEach(schedule::add);
+        System.out.println("수정 후 ... ");
+        meeting.validateAndUpdate(
+                new UpdateMeeting(
+                        "new title",
+                        ZonedDateTime.now(),
+                        ZonedDateTime.now().plusHours(1),
+                        null,
+                        "A",
+                        "new agenda"
+                )
+        );
+        meeting.print();
 
-            Meeting meeting = meetings.get(0);
-            meeting.print();
 
-            System.out.println("수정 후 ... ");
-            meetings.get(0).validateAndUpdate(
-                    new UpdateMeeting(
-                            "new title",
-                            ZonedDateTime.now(),
-                            ZonedDateTime.now().plusHours(1),
-                            null,
-                            "A",
-                            "new agenda"
-                    )
-            );
-            meeting.print();
+       // schedule.printAll();
 
-            schedule.printAll();
-
-        } catch (IOException e) {
-            System.out.println("CSV 파일을 읽는 중 오류가 발생했습니다: " + e.getMessage());
-        }
-
-        schedule.printAll();*/
     }
 }
