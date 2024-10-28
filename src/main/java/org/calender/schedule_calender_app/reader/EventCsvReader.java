@@ -15,14 +15,26 @@ import java.util.HashSet;
 import java.util.List;
 
 
+import com.opencsv.CSVReader;
+import org.calender.schedule_calender_app.event.Meeting;
+
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+
 public class EventCsvReader {
-    public List<org.calender.schedule_calender_app.event.Meeting> readMeetings(String path) throws IOException {
-        List<org.calender.schedule_calender_app.event.Meeting> result = new ArrayList<>();
+
+    public List<Meeting> readMeetings(String path) throws IOException {
+        List<Meeting> result = new ArrayList<>();
 
         // 데이터를 읽는 부분
         List<String[]> read = readAll(path);
         for (int i = 0; i < read.size(); i++) {
-            // 헤더는 스킵 - 메서드로 분리
+            // 헤더는 스킵
             if (skipHeader(i)) {
                 continue;
             }
@@ -30,7 +42,7 @@ public class EventCsvReader {
             String[] each = read.get(i);
 
             result.add(
-                    new org.calender.schedule_calender_app.event.Meeting(
+                    new Meeting(
                             Integer.parseInt(each[0]),                          // ID
                             each[2],                                            // 제목
                             ZonedDateTime.of(
@@ -48,9 +60,6 @@ public class EventCsvReader {
             );
 
         }
-        // meeting 으로 변환하는 부분
-
-
         return result;
     }
 
@@ -60,10 +69,13 @@ public class EventCsvReader {
 
     private List<String[]> readAll(String path) throws IOException {
         InputStream in = getClass().getResourceAsStream(path);
-        InputStreamReader reader = new InputStreamReader(in, StandardCharsets.UTF_8);
+        if (in == null) {
+            throw new FileNotFoundException("파일을 찾을 수 없습니다: " + path);
+        }
 
-        CSVReader csvReader = new CSVReader(reader);
-        return csvReader.readAll();
-
+        try (InputStreamReader reader = new InputStreamReader(in, StandardCharsets.UTF_8);
+             CSVReader csvReader = new CSVReader(reader)) {
+            return csvReader.readAll();
+        }
     }
 }
