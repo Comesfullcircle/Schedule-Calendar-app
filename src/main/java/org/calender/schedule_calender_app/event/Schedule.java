@@ -25,7 +25,7 @@ public class Schedule {
     }
 
     //등록 중복 체크
-    public boolean hasScheduleConflictWith(AbstractEvent event){
+    private boolean hasScheduleConflictWith(AbstractEvent event){
         return events.stream()
                 .anyMatch(each ->
                         (event.getStartAt().isBefore(each.getEndAt()) && event.getStartAt().isAfter(each.getStartAt()))

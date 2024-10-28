@@ -1,5 +1,8 @@
 package org.calender.schedule_calender_app.event;
 
+import org.calender.schedule_calender_app.event.update.AbstractAuditableEvent;
+import org.calender.schedule_calender_app.event.update.UpdateMeeting;
+
 import java.time.ZonedDateTime;
 import java.util.Set;
 
@@ -28,5 +31,18 @@ public class Meeting extends AbstractEvent {
     @Override
     public boolean support(EventType type) {
         return type == EventType.MEETING;
+    }
+
+    public void update(){
+
+    }
+
+    @Override
+    protected void update(AbstractAuditableEvent update) {
+        UpdateMeeting meetingUpdate = (UpdateMeeting) update;
+
+        this.participants = meetingUpdate.getParticipatns();
+        this.meetingRoom = meetingUpdate.getMeetingRoom();
+        this.agenda = meetingUpdate.getAgenda();
     }
 }
