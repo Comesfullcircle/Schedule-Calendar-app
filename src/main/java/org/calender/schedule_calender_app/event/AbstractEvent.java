@@ -57,6 +57,10 @@ public abstract class AbstractEvent implements Event {
 
     protected abstract void update(AbstractAuditableEvent update);
 
+    public void delete(boolean deletedYn) {
+        this.deletedYn = deletedYn;
+    }
+
     public String getTitle() { return this.title; }
     public ZonedDateTime getStartAt() { return startAt; }
     public ZonedDateTime getEndAt() { return endAt; }

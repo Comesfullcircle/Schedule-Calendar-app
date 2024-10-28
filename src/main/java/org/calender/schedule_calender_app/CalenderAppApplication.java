@@ -33,6 +33,20 @@ public class CalenderAppApplication {
                         "new agenda"
                 )
         );
+
+        meeting.delete(true);
+        System.out.println("삭제 후 수정 시도 ... ");
+        meeting.validateAndUpdate(
+                new UpdateMeeting(
+                        "new title 2",
+                        ZonedDateTime.now(),
+                        ZonedDateTime.now().plusHours(1),
+                        null,
+                        "B",
+                        "new agenda 2"
+                )
+        );
+
         meeting.print();
 
 
