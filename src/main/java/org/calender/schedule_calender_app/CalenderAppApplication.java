@@ -5,7 +5,6 @@ import org.calender.schedule_calender_app.reader.EventCsvReader;
 
 
 import java.io.IOException;
-import java.time.ZonedDateTime;
 import java.util.List;
 
 public class CalenderAppApplication {
