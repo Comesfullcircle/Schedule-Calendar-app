@@ -14,13 +14,29 @@ public class CalenderAppApplication {
 
     public static void main(String[] args) throws IOException {
         Schedule schedule = new Schedule();
+
         EventCsvReader csvReader = new EventCsvReader(new RawCsvReader());
         String meetingCsvPath = "/data/meeting.csv";
+        String noDisturbanceCsvPath = "/data/no_disturbance.csv";
+        String outOfOfficeCsvPath = "/data/out_of_office.csv";
+        String toDoCsvPath = "/data/to_do.csv";
+
 
         List<Meeting> meetings = csvReader.readMeetings(meetingCsvPath);
         meetings.forEach(schedule::add);
 
-        Meeting meeting = meetings.get(0);
+        List<NoDisturbance> noDisturbances = csvReader.readNoDisturbance(noDisturbanceCsvPath);
+        noDisturbances.forEach(schedule::add);
+
+        List<OutOfOffice> outOfOffices = csvReader.readOutOfOffice(outOfOfficeCsvPath);
+        outOfOffices.forEach(schedule::add);
+
+        List<Todo> todos = csvReader.readTodo(toDoCsvPath);
+        todos.forEach(schedule::add);
+
+        schedule.printAll();
+
+     /*   Meeting meeting = meetings.get(0);
         meeting.print();
 
         System.out.println("수정 후 ... ");
@@ -32,26 +48,23 @@ public class CalenderAppApplication {
                         null,
                         "A",
                         "new agenda"
+
                 )
         );
 
-       /* meeting.delete(true);
+        meeting.delete(true);
         System.out.println("삭제 후 수정 시도 ... ");
         meeting.validateAndUpdate(
                 new UpdateMeeting(
-                        "new title 2",
+                        "new title",
                         ZonedDateTime.now(),
                         ZonedDateTime.now().plusHours(1),
                         null,
                         "B",
-                        "new agenda 2"
+                        "new agenda2"
+
                 )
-        ); */
-
-        meeting.print();
-
-
-       // schedule.printAll();
-
+        );
+        meeting.print();*/
     }
 }

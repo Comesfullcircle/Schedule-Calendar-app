@@ -41,7 +41,7 @@ public class Meeting extends AbstractEvent {
     protected void update(AbstractAuditableEvent update) {
         UpdateMeeting meetingUpdate = (UpdateMeeting) update;
 
-        this.participants = meetingUpdate.getParticipatns();
+        this.participants = meetingUpdate.getParticipants();
         this.meetingRoom = meetingUpdate.getMeetingRoom();
         this.agenda = meetingUpdate.getAgenda();
     }
